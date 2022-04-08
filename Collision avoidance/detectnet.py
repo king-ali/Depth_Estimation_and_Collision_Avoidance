@@ -1,33 +1,9 @@
-#!/usr/bin/python3
-#
-# Copyright (c) 2020, NVIDIA CORPORATION. All rights reserved.
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the "Software"),
-# to deal in the Software without restriction, including without limitation
-# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-# and/or sell copies of the Software, and to permit persons to whom the
-# Software is furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-# DEALINGS IN THE SOFTWARE.
-#
-
 import jetson.inference
 import jetson.utils
 import cv2
 import argparse
 import sys
 
-# parse the command line
 parser = argparse.ArgumentParser(description="Locate objects in a live camera stream using an object detection DNN.", 
                                  formatter_class=argparse.RawTextHelpFormatter, epilog=jetson.inference.detectNet.Usage() +
                                  jetson.utils.videoSource.Usage() + jetson.utils.videoOutput.Usage() + jetson.utils.logUsage())
@@ -74,7 +50,6 @@ while True:
 
 	# print the detections
 	# print("detected {:d} objects in image".format(len(detections)))
-	# print("heloooooooooooooooooooo")
 
 	for detection in detections:
 		# print(detection)
@@ -96,15 +71,14 @@ while True:
 
 
 
-    # https://github.com/NVIDIA/DIGITS/issues/2214
-	# https://github.com/dusty-nv/jetson-inference/blob/master/docs/aux-image.md
+ 
     # cudaDrawCircle(input, (cx,cy), radius, (r,g,b,a), output=None)
 	# jetson.utils.cudaDrawCircle(img, (50,50), 25, (0,255,127,200))
 	# cudaDrawLine(input, (x1,y1), (x2,y2), (r,g,b,a), line_width, output=None)
 	jetson.utils.cudaDrawLine(img, (150,300),(500,300), (0,255,0,200), 3)
 	jetson.utils.cudaDrawLine(img, (70,380),(600,380), (0,255,0,100), 3)
 	 
-	# render the imagerender the imagerender the imagere
+	
 	output.Render(img)
 	# cv2.imshow("img1", img1)
 
